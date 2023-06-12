@@ -10,6 +10,8 @@
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"> --}}
 
+  
+    <link rel="stylesheet" href="jQurery/select2.min.css">
   <!-- Google Font: Source Sans Pro -->
   
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -1046,71 +1048,81 @@
 </script> --}}
 
 
+{{-- <script>
+  var selectedMedicines = [];
+
+  document.getElementById("saveMedicine").addEventListener("click", function(event) {
+      event.preventDefault();
+
+      var obatSelect = document.getElementById("obatSelect");
+      var jumlahInput = document.getElementById("jumlah");
+
+      var obatId = obatSelect.value;
+      var obatNama = obatSelect.options[obatSelect.selectedIndex].text;
+      var jumlah = jumlahInput.value;
+
+      var medicine = {
+          obatId: obatId,
+          obatNama: obatNama,
+          jumlah: jumlah
+      };
+
+      selectedMedicines.push(medicine);
+
+      // Tampilkan jumlah obat dan nama obat di samping tombol "Tambahkan"
+      var medicineList = document.getElementById("medicineList");
+      if (medicineList.textContent === "") {
+          medicineList.innerHTML = "<li><strong>" + obatNama + "</strong>: " + jumlah + "</li>";
+      } else {
+          var listItem = document.createElement("li");
+          listItem.innerHTML = "<strong>" + obatNama + "</strong>: " + jumlah;
+          medicineList.appendChild(listItem);
+      }
+
+      // Reset nilai pilihan obat dan jumlah input
+      obatSelect.value = "";
+      jumlahInput.value = "";
+  });
+
+  document.getElementById("saveData").addEventListener("click", function(event) {
+      event.preventDefault();
+
+      // Kirim data ke server menggunakan permintaan HTTP (contoh dengan Fetch API)
+      fetch('/simpan-data', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(selectedMedicines),
+      })
+      .then(response => response.json())
+      .then(data => {
+          // Proses respon dari server
+          console.log(data);
+          alert('Data berhasil disimpan');
+          // Reset daftar obat yang dipilih
+          selectedMedicines = [];
+          // Reset tampilan daftar obat
+          var medicineList = document.getElementById("medicineList");
+          medicineList.innerHTML = "";
+      })
+      .catch(error => {
+          console.error('Error:', error);
+          alert('Terjadi kesalahan saat menyimpan data');
+      });
+  });
+</script> --}}
+
+<!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script>
-$(document).ready(function() {
-  var medicineData = []; // Array untuk menyimpan data obat
 
-  // Tambahkan obat ke dalam array
-  $("#addMedicineBtn").click(function() {
-    var obatSelect = $("#obatSelect");
-    var obatId = obatSelect.val();
-    var obatName = obatSelect.find("option:selected").text();
-    var jumlahObat = $("#jumlah").val();
 
-    // Validasi input
-    if (obatId && obatName && jumlahObat) {
-      // Tambahkan data obat ke dalam array
-      medicineData.push({
-        obatId: obatId,
-        obatName: obatName,
-        jumlahObat: jumlahObat
-      });
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
-      // Reset input form
-      obatSelect.val("");
-      $("#jumlah").val("");
 
-      // Tampilkan data obat di bawah form
-      showMedicineData();
-    }
-  });
-
-  // Tampilkan data obat di bawah form
-  function showMedicineData() {
-    var medicineDataDiv = $("#medicineData");
-    medicineDataDiv.empty(); // Kosongkan div sebelum menambahkan data
-
-    // Tampilkan data obat
-    if (medicineData.length > 0) {
-      var obatText = "";
-      for (var i = 0; i < medicineData.length; i++) {
-        obatText += medicineData[i].jumlahObat+ " " + medicineData[i].obatName;
-        if (i < medicineData.length - 1) {
-          obatText += ", ";
-        }
-      }
-      var obatItem =   $("<p>").text(obatText);
-      medicineDataDiv.append(obatItem);
-    } else {
-      // Tampilkan pesan jika tidak ada data obat
-      medicineDataDiv.text("Belum ada obat yang ditambahkan");
-    }
-  }
-
-  // Simpan data obat
-  $("#saveMedicineBtn").click(function() {
-    // Lakukan operasi yang diinginkan dengan data obat, misalnya mengirim ke server
-    // ...
-    // Setelah itu, kosongkan array data obat
-    medicineData = [];
-    // Kosongkan tampilan data obat
-    showMedicineData();
-  });
-});
-
-</script>
+@yield('scripts')
 
 
     </body>

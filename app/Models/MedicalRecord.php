@@ -10,11 +10,10 @@ class MedicalRecord extends Model
     use HasFactory;
     protected $table = 'medical_record';
     protected $fillable = [
-        'id',
         'pasien_id',
-        // 'obat_id',
-        // 'jumlah_dipakai',
-        // 'obat_dipakai',
+        'obat_id',
+        'jumlah_dipakai',
+        'obat_dipakai',
         'diagnosa',
         'keluhan'
     ];

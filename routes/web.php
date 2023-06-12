@@ -181,13 +181,13 @@ Route::get('/add/view/',[MedicalRecordController::class, 'index'])->name('mRecor
 
 Route::post('/medical/record',[MedicalRecordController::class,'store'])->name('mRecord.store');
 
-// Route::get('/search-obat', 'MedicalRecordController@search')->name('search.obat');
-Route::get('/pencarian-obat',[MedicalRecordController::class,'pencarianObat'])->name('pencarian.obat');
 // Route::get('/pencarian-obat', 'MedicalRecordController@pencarianObat')->name('pencarian.obat');
 
 
-Route::post('/medicine/add', [MedicalRecordController::class, 'addMedicine'])->name('medicine.add');
-Route::post('/medicine/add', [MedicalRecordController::class, 'addMedicine'])->name('medicine.add');
+// Route::post('/medicine/add', [MedicalRecordController::class, 'addMedicine'])->name('medicine.add');
+
+// Route::post('/simpan-data', [MedicalRecordController::class, 'simpanData'])->name('medical-record.simpan');
+
 
 // Route::post('/simpan-obat', [MedicalRecordController::class, 'saveMedicine'])->name('save.medicine');
 

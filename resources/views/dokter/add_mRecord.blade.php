@@ -49,6 +49,7 @@
                         @method('POST')
 
                         <input type="text" hidden name="idp" value="{{ $data->id }}">
+                        {{-- <input type="text"  name="dop" value="{{ $datas->id }}"> --}}
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nama Pasien') }}</label>
@@ -135,76 +136,58 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="obat" class="col-md-4 col-form-label text-md-right">{{ __('Pilih Obat') }}</label>
-                            <div class="col-md-6 mb-3">
-                                <a href="#" rel="tooltip" class="btn btn-info btn-sm col-md-8" data-toggle="modal" data-target="#exampleModal">
-                                    <i>Lihat Selengkapnya...</i>
-                                </a>
-                                <div class="modal fade text-left" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Tambahkan Obat</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form>
-                                                    <div class="form-group row">
-                                                        <label for="obatSelect" class="col-form-label col-md-4">Pilih Obat:</label>
-                                                        <div class="col-md-6">
-                                                            <select id="obatSelect" class="form-control @error('obat') is-invalid @enderror" name="obat" required data-live-search="true">
-                                                                <option value="">Pilih Obat...</option>
-                                                                @foreach($obat as $item)
-                                                                    @if ($item->jumlah > 0)
-                                                                        <option value="{{ $item->id }}">{{ $item->nama_obat }}</option>
-                                                                    @else
-                                                                        <option value="{{ $item->id }}" disabled>{{ $item->nama_obat }} (Habis)</option>
-                                                                    @endif
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label for="jumlah" class="col-form-label col-md-4">Masukkan Jumlah:</label>
-                                                        <div class="col-md-6 input-group date">
-                                                            <input id="jumlah" type="number" class="form-control @error('jumlah') is-invalid @enderror" name="jumlah_dipakai" value="{{ old('jumlah') }}" required autocomplete="jumlah">
-                                                            @error('jumlah')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-success" id="addMedicineBtn">Tambah</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <label for="obatSelect" class="col-md-4 col-form-label text-md-right">Pilih Obat:</label>
+                            <div class="col-md-6">
+
+                                <select id="obatSelect" class="form-control select2 @error('obat') is-invalid @enderror" name="obat" required>
+                                    <option selected disabled value="">Pilih obat</option>
+
+                                    @foreach($obat as $item)
+                                        @if ($item->jumlah > 0)
+                                            <option value="{{ $item->id }}">{{ $item->nama_obat }}</option>
+                                        @else
+                                            <option value="{{ $item->id }}" disabled>{{ $item->nama_obat }} (Habis)</option>
+                                        @endif
+                                    @endforeach
+
+                                </select>
                             </div>
-                        </div> 
-                        
-
-                        <div class="form-group row">
-                            <label for="diagnosa" class="col-md-4 col-form-label text-md-right"></label>
-                                <div class="col-md-6 mb-3">
-                                    <div id="medicineData" class="ml"></div>
-                                </div>
+                            <div class="col-md-6 mb-3">
+                                @error('diagnosa')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-
+                        
+                        
+                        <div class="form-group row">
+                            <label for="jumlah" class="col-form-label col-md-4 text-md-right">Masukkan Jumlah:</label>
+                            <div class="col-md-6 input-group date">
+                                <input id="jumlah" type="number" class="form-control @error('jumlah') is-invalid @enderror" name="jumlah_dipakai" value="{{ old('jumlah') }}" required autocomplete="jumlah">
+                                @error('jumlah')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        
                         <div class="form-group row mb-3">
                             <div class="col-md-6 offset-md-4">
-                                {{-- <button id="saveMedicineBtn" type="submit" class="btn btn-success"> --}}
-                                    <button type="submit" class="btn btn-success" id="saveMedicine">
+                                {{-- <button type="submit" class="btn btn-info" id="saveMedicine">
                                     {{ __('Tambahkan') }}
+                                </button> --}}
+
+                                <button type="submit" class="btn btn-success" id="saveData">
+                                    {{ __('Simpan') }}
                                 </button>
+
+                                <div id="medicineList"></div>
                             </div>
                         </div>
+                        {{-- <ul id="medicineList"></ul> --}}
                     </form>
                     </div>
             </div>
@@ -212,4 +195,94 @@
     </div>
 </div>
 @endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function () {
+        $('#obatSelect').select2();
+
+        // Tangkap perubahan pada input pencarian
+        $('#obatSelect').on('select2:open', function (e) {
+            $('.select2-search__field').attr('placeholder', 'Cari obat...');
+        });
+    });
+</script>
+@endsection
+
+
+
+
+
+{{-- <div class="form-group row">
+    <label for="obat" class="col-md-4 col-form-label text-md-right">{{ __('Pilih Obat') }}</label>
+    <div class="col-md-6 mb-3">
+        <a href="#" rel="tooltip" class="btn btn-info btn-sm col-md-8" data-toggle="modal" data-target="#exampleModal">
+            <i>Lihat Selengkapnya...</i>
+        </a>
+        <div class="modal fade text-left" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Tambahkan Obat</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group row">
+                                <label for="obatSelect" class="col-form-label col-md-4">Pilih Obat:</label>
+                                <div class="col-md-6">
+                                    <select id="obatSelect" class="form-control @error('obat') is-invalid @enderror" name="obat" required data-live-search="true">
+                                        <option value="">Pilih Obat...</option>
+                                        @foreach($obat as $item)
+                                            @if ($item->jumlah > 0)
+                                                <option value="{{ $item->id }}">{{ $item->nama_obat }}</option>
+                                            @else
+                                                <option value="{{ $item->id }}" disabled>{{ $item->nama_obat }} (Habis)</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="jumlah" class="col-form-label col-md-4">Masukkan Jumlah:</label>
+                                <div class="col-md-6 input-group date">
+                                    <input id="jumlah" type="number" class="form-control @error('jumlah') is-invalid @enderror" name="jumlah_dipakai" value="{{ old('jumlah') }}" required autocomplete="jumlah">
+                                    @error('jumlah')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success" id="addMedicineBtn">Tambah</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  --}}
+
+                        {{-- <div class="form-group row">
+                            <label for="diagnosa" class="col-md-4 col-form-label text-md-right"></label>
+                                <div class="col-md-6 mb-3">
+                                    <div id="medicineData" class="ml"></div>
+                                </div>
+                        </div> --}}
+
+                                                        {{-- <select id="obatSelect" class="select2 form-control @error('obat') is-invalid @enderror" name="obat" required>
+                                    <option value="">Pilih Obat...</option>
+                                    @foreach($obat as $item)
+                                        @if ($item->jumlah > 0)
+                                            <option value="{{ $item->id }}">{{ $item->nama_obat }}</option>
+                                        @else
+                                            <option value="{{ $item->id }}" disabled>{{ $item->nama_obat }} (Habis)</option>
+                                        @endif
+                                    @endforeach
+                                </select> --}}
 

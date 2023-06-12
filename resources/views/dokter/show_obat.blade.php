@@ -55,7 +55,7 @@
 
     <span class="counter pull-right"></span>
 
-    <table class="table table-hover results table-sm">
+    <table class="table table-hover table-bordered results table-sm">
       <thead>
         <tr class="table-info text-center" >
           <th>#</th>

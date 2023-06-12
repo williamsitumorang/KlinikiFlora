@@ -115,7 +115,7 @@
                     </div>
                 </div>
 
-            </td>0
+            </td>
             
         {{-- <table class="table table-hover results table-sm">
         <thead>

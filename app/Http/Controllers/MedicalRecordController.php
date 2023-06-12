@@ -17,7 +17,8 @@ class MedicalRecordController extends Controller
 
     public function getID ($id) {
         $data = Patient::find($id);
-
+        
+        
         $obat = Obat::all();
 
         
@@ -53,30 +54,62 @@ class MedicalRecordController extends Controller
     $medicalRecord = new MedicalRecord();
     // Mendapatkan pasien_id dari tabel pasien berdasarkan primary key
     $medicalRecord->pasien_id = $request->idp;
-    $medicalRecord->diagnosa = $request->input('diagnosa');
-    $medicalRecord->keluhan = $request->input('keluhan');
+    $medicalRecord->obat_id = $request->obat;
+    $medicalRecord->jumlah_dipakai = $request->jumlah_dipakai;
+    $medicalRecord->diagnosa = $request->diagnosa;
+    $medicalRecord->keluhan = $request->keluhan;
     $medicalRecord->save();
+
+    $obat = Obat::find($request->obat);
+    $obat->jumlah -= $request->jumlah_dipakai;
+    $obat->save();
 
     return redirect()->back()->with('success', 'Medical Record berhasil Ditambahkan');
     }
 
-    public function addMedicine(Request $request)
-{
-    $obatId = $request->input('obat');
-    $jumlah = $request->input('jumlah_dipakai');
+//     public function addMedicine(Request $request)
+// {
+//     $obatId = $request->input('obat');
+//     $jumlah = $request->input('jumlah_dipakai');
 
-    $obat = Obat::find($obatId);
+//     $obat = Obat::find($obatId);
 
-    $medicineData = session()->get('medicineData', []);
-    $medicineData[] = [
-        'obat_id' => $obatId,
-        'nama_obat' => $obat->nama_obat,
-        'jumlah_dipakai' => $jumlah
-    ];
-    session()->put('medicineData', $medicineData);
+//     $medicineData = session()->get('medicineData', []);
+//     $medicineData[] = [
+//         'obat_id' => $obatId,
+//         'nama_obat' => $obat->nama_obat,
+//         'jumlah_dipakai' => $jumlah
+//     ];
+//     session()->put('medicineData', $medicineData);
 
-    return redirect()->back();
-}
+//     return redirect()->back();
+// }
+
+// public function simpanData(Request $request)
+// {
+//     // Validasi request
+//     $request->validate([
+//         'obatId' => 'required',
+//         'obatNama' => 'required',
+//         'jumlah' => 'required|numeric|min:1',
+//         'diagnosa' => 'required',
+//         'keluhan' => 'required',
+//     ]);
+
+//     // Simpan data obat ke dalam database MedicalRecord
+//     $medicalRecord = new MedicalRecord();
+//     $medicalRecord->obat_id = $request->obatId;
+//     $medicalRecord->obat_dipakai = $request->obatNama;
+//     $medicalRecord->jumlah_dipakai = $request->jumlah;
+//     $medicalRecord->diagnosa = $request->diagnosa;
+//     $medicalRecord->keluhan = $request->keluhan;
+//     $medicalRecord->save();
+
+//     dd($request->all());
+
+//     // Respon dengan data yang berhasil disimpan
+//     return response()->json(['message' => 'Data berhasil disimpan'], 200);
+// }
 
 // public function saveMedicine(Request $request)
 // {
@@ -112,6 +145,17 @@ class MedicalRecordController extends Controller
 //         // Gagal menyimpan data obat
 //         return response()->json(['success' => false, 'message' => 'Terjadi kesalahan saat menyimpan data obat']);
 //     }
+// }
+
+// public function search(Request $request)
+// {
+//     $keyword = $request->get('q');
+    
+//     $obat = Obat::where('nama_obat', 'like', "%{$keyword}%")
+//         ->where('jumlah', '>', 0)
+//         ->get(['id', 'nama_obat']);
+
+//     return response()->json($obat);
 // }
 
 
