@@ -37,7 +37,7 @@
     </div>
   </div>
 
-<div class="container">
+  <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-9">
             <div class="card shadow">
@@ -53,10 +53,8 @@
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nama Pasien') }}</label>
-
                             <div class="col-md-6 mb-3">
-                              <input type="text" name='name' value = "{{$data['name']}}" placeholder="Nama Baru..." id="name" readonly class="form-control @error('name') is-invalid @enderror" required  >
-
+                                <input type="text" name='name' value="{{ $data['name'] }}" placeholder="Nama Baru..." id="name" readonly class="form-control @error('name') is-invalid @enderror" required>
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -66,11 +64,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="gender" class="col-md-4 col-form-label text-md-right" >{{ __('Jenis_Kelamin') }}</label>
-
+                            <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Jenis Kelamin') }}</label>
                             <div class="col-md-6 mb-3">
-                                <input type="text" readonly name='gender' value = "{{$data['gender']}}"  id="gender" class="form-control @error('gender') is-invalid @enderror" required >
-
+                                <input type="text" readonly name='gender' value="{{ $data['gender'] }}" id="gender" class="form-control @error('gender') is-invalid @enderror" required>
                                 @error('gender')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -81,10 +77,8 @@
 
                         <div class="form-group row">
                             <label for="phone_number" class="col-md-4 col-form-label text-md-right">{{ __('Nomor Telepon') }}</label>
-
                             <div class="col-md-6 mb-3">
-                                <input id="phone_number" readonly type="text" name="phone_number" value = "{{ $data['phone_number']}}" placeholder="Nomor Baru..." class="form-control @error('phone_number') is-invalid @enderror">
-                                
+                                <input id="phone_number" readonly type="text" name="phone_number" value="{{ $data['phone_number'] }}" placeholder="Nomor Baru..." class="form-control @error('phone_number') is-invalid @enderror">
                                 @error('phone_number')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -95,10 +89,8 @@
 
                         <div class="form-group row">
                             <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Alamat') }}</label>
-
                             <div class="col-md-6 mb-3">
-                                <input id="address" readonly type="text" value="{{ $data['address']}}" name="address" placeholder="Alamat Baru..." class="form-control @error('address') is-invalid @enderror" required autocomplete="address">
-
+                                <input id="address" readonly type="text" value="{{ $data['address'] }}" name="address" placeholder="Alamat Baru..." class="form-control @error('address') is-invalid @enderror" required autocomplete="address">
                                 @error('address')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -109,10 +101,8 @@
 
                         <div class="form-group row">
                             <label for="keluhan" class="col-md-4 col-form-label text-md-right">{{ __('Keluhan') }}</label>
-
                             <div class="col-md-6 mb-3">
-                                <textarea id="keluhan" type="text" class="form-control @error('keluhan') is-invalid @enderror" name="keluhan" value="{{ old('keterangan') }}" required autocomplete="keluhan"> </textarea>
-
+                                <textarea id="keluhan" type="text" class="form-control @error('keluhan') is-invalid @enderror" name="keluhan" value="{{ old('keterangan') }}" required autocomplete="keluhan"></textarea>
                                 @error('keluhan')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -123,10 +113,8 @@
 
                         <div class="form-group row">
                             <label for="diagnosa" class="col-md-4 col-form-label text-md-right">{{ __('Diagnosa') }}</label>
-
                             <div class="col-md-6 mb-3">
-                                <textarea id="diagnosa" type="text" class="form-control @error('diagnosa') is-invalid @enderror" name="diagnosa" value="{{ old('diagnosa') }}" required autocomplete="diagnosa"> </textarea>
-
+                                <textarea id="diagnosa" type="text" class="form-control @error('diagnosa') is-invalid @enderror" name="diagnosa" value="{{ old('diagnosa') }}" required autocomplete="diagnosa"></textarea>
                                 @error('diagnosa')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -138,21 +126,21 @@
                         <div class="form-group row">
                             <label for="obatSelect" class="col-md-4 col-form-label text-md-right">Pilih Obat:</label>
                             <div class="col-md-6">
-
-                                <select id="obatSelect" class="form-control select2 @error('obat') is-invalid @enderror" name="obat" required>
-                                    <option selected disabled value="">Pilih obat</option>
-
-                                    @foreach($obat as $item)
-                                        @if ($item->jumlah > 0)
-                                            <option value="{{ $item->id }}">{{ $item->nama_obat }}</option>
-                                        @else
-                                            <option value="{{ $item->id }}" disabled>{{ $item->nama_obat }} (Habis)</option>
-                                        @endif
-                                    @endforeach
-
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
+                                <div class="input-group">
+                                    <select id="obatSelect1" class="form-control select2 @error('obat') is-invalid @enderror" name="obat" required>
+                                        <option selected disabled value="">Pilih obat</option>
+                        
+                                        @foreach($obat as $item)
+                                            @if ($item->jumlah > 0)
+                                                <option value="{{ $item->id }}">{{ $item->nama_obat }}</option>
+                                            @else
+                                                <option value="{{ $item->id }}" disabled>{{ $item->nama_obat }} (Habis)</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                        
+                                    <input id="jumlah1" placeholder="jumlah obat" type="number" class="ml-3 form-control @error('jumlah') is-invalid @enderror" name="jumlah_dipakai" value="{{ old('jumlah') }}" required autocomplete="jumlah">
+                                </div>
                                 @error('diagnosa')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -161,19 +149,122 @@
                             </div>
                         </div>
                         
-                        
                         <div class="form-group row">
-                            <label for="jumlah" class="col-form-label col-md-4 text-md-right">Masukkan Jumlah:</label>
-                            <div class="col-md-6 input-group date">
-                                <input id="jumlah" type="number" class="form-control @error('jumlah') is-invalid @enderror" name="jumlah_dipakai" value="{{ old('jumlah') }}" required autocomplete="jumlah">
-                                @error('jumlah')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                            <label for="obatSelect2" class="col-md-4 col-form-label text-md-right"></label>
+                            <div class="col-md-6">
+                                <a href="#" id="tambahObatLink" class="font-italic">Klik Disini</a>
                             </div>
                         </div>
                         
+                        <div id="formObat" style="display: none;">
+                            
+                            <div class="form-group row">
+                                <label for="obatSelect2" class="col-md-4 col-form-label text-md-right"></label>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <select id="obatSelect2" class="form-control select2 @error('obat') is-invalid @enderror" name="obat2">
+                                            <option selected disabled value="">Pilih obat</option>
+                                            @foreach($obat as $item)
+                                                @if ($item->jumlah > 0)
+                                                    <option value="{{ $item->id }}">{{ $item->nama_obat }}</option>
+                                                @else
+                                                    <option value="{{ $item->id }}" disabled>{{ $item->nama_obat }} (Habis)</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                        <input id="jumlah2" placeholder="jumlah obat" type="number" class="ml-3 form-control @error('jumlah') is-invalid @enderror" name="jumlah_dipakai2" value="{{ old('jumlah') }}" autocomplete="jumlah">
+                                    </div>
+                                    
+                                    @error('diagnosa')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        
+                            <div class="form-group row">
+                                <label for="obatSelect3" class="col-md-4 col-form-label text-md-right"></label>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <select id="obatSelect3" class="form-control select2 @error('obat') is-invalid @enderror" name="obat3">
+                                            <option selected disabled value="">Pilih obat</option>
+                        
+                                            @foreach($obat as $item)
+                                                @if ($item->jumlah > 0)
+                                                    <option value="{{ $item->id }}">{{ $item->nama_obat }}</option>
+                                                @else
+                                                    <option value="{{ $item->id }}" disabled>{{ $item->nama_obat }} (Habis)</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                        
+                                        <input id="jumlah3" placeholder="jumlah obat" type="number" class="ml-3 form-control @error('jumlah') is-invalid @enderror" name="jumlah_dipakai3" value="{{ old('jumlah') }}" autocomplete="jumlah">
+                                    </div>
+                                    @error('diagnosa')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        
+                            <div class="form-group row">
+                                <label for="obatSelect" class="col-md-4 col-form-label text-md-right"></label>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <select id="obatSelect4" class="form-control select2 @error('obat') is-invalid @enderror" name="obat4">
+                                            <option selected disabled value="">Pilih obat</option>
+                        
+                                            @foreach($obat as $item)
+                                                @if ($item->jumlah > 0)
+                                                    <option value="{{ $item->id }}">{{ $item->nama_obat }}</option>
+                                                @else
+                                                    <option value="{{ $item->id }}" disabled>{{ $item->nama_obat }} (Habis)</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                        
+                                        <input id="jumlah4" placeholder="jumlah obat" type="number" class="ml-3 form-control @error('jumlah') is-invalid @enderror" name="jumlah_dipakai4" value="{{ old('jumlah') }}" autocomplete="jumlah">
+                                    </div>
+                                    @error('diagnosa')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        
+                            <div class="form-group row">
+                                <label for="obatSelect" class="col-md-4 col-form-label text-md-right"></label>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <select id="obatSelect5" class="form-control select2 @error('obat') is-invalid @enderror" name="obat5">
+                                            <option selected disabled value="">Pilih obat</option>
+                        
+                                            @foreach($obat as $item)
+                                                @if ($item->jumlah > 0)
+                                                    <option value="{{ $item->id }}">{{ $item->nama_obat }}</option>
+                                                @else
+                                                    <option value="{{ $item->id }}" disabled>{{ $item->nama_obat }} (Habis)</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                        
+                                        <input id="jumlah5" placeholder="jumlah obat" type="number" class="ml-3 form-control @error('jumlah') is-invalid @enderror" name="jumlah_dipakai5" value="{{ old('jumlah') }}" autocomplete="jumlah">
+                                    </div>
+                                    @error('diagnosa')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                            
+                          </div>
+
+
                         <div class="form-group row mb-3">
                             <div class="col-md-6 offset-md-4">
                                 {{-- <button type="submit" class="btn btn-info" id="saveMedicine">
@@ -187,26 +278,55 @@
                                 <div id="medicineList"></div>
                             </div>
                         </div>
-                        {{-- <ul id="medicineList"></ul> --}}
+
                     </form>
-                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 @endsection
 
 @section('scripts')
 <script>
-    $(document).ready(function () {
-        $('#obatSelect').select2();
+$(document).ready(function() {
+    $('.select2').select2();
 
-        // Tangkap perubahan pada input pencarian
-        $('#obatSelect').on('select2:open', function (e) {
-            $('.select2-search__field').attr('placeholder', 'Cari obat...');
-        });
+    // Tangkap perubahan pada input pencarian
+    $('.select2').on('select2:open', function(e) {
+        $(this).data('select2').dropdown.$search.attr('placeholder', 'Cari obat...');
     });
+});
 </script>
+
+@section('scripts')
+<script>
+    $(document).ready(function() {
+      $('.select2').select2();
+  
+      // Tangkap perubahan pada input pencarian
+      $('.select2').on('select2:open', function(e) {
+          $(this).data('select2').$dropdown.find('.select2-search__field').attr('placeholder', 'Cari obat...');
+      });
+  
+      var formObat = document.getElementById("formObat");
+      var tambahObatLink = document.getElementById("tambahObatLink");
+      var isFormObatVisible = false;
+  
+      tambahObatLink.addEventListener("click", function() {
+        if (isFormObatVisible) {
+          formObat.style.display = "none";
+          isFormObatVisible = false;
+        } else {
+          formObat.style.display = "block";
+          isFormObatVisible = true;
+        }
+      });
+    });
+  </script>
+@endsection
+
 @endsection
 
 

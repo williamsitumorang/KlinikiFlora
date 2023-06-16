@@ -60,6 +60,8 @@
         <tr class="table-info text-center" >
           <th>#</th>
           <th scope="col">Nama</th>
+          <th scope="col">Tanggal Lahir</th>
+          <th scope="col">Umur</th>
           <th scope="col">Jenis Kelamin</th>
           <th scope="col">No. Telepon</th>
           <th scope="col">Alamat</th>
@@ -73,7 +75,9 @@
         @foreach ($data as $item)
         <tr >
             <th scope="row">{{ $item->id }}</th>
-            <td>{{ $item->name }}</td>
+            <td>{{ $item->name }} </td>
+            <td>{{ \Carbon\Carbon::parse($item->tanggal_lahir)->isoFormat('D MMMM YYYY') }}</td>
+            <td>{{ \Carbon\Carbon::parse($item->tanggal_lahir)->diffInYears(\Carbon\Carbon::now()) }}</td>
             <td>{{ $item->gender }}</td>
             <td>{{ $item->phone_number }}</td>
             <td>{{ $item->address }}</td>
@@ -108,7 +112,7 @@
     </table>
 
         <nav class="pagination mb-3 justify-content-end">
-            <ul class="pagination btn btn-sm btn-info"> {{ $data->withQueryString()->links() }} </ul>
+            <ul class="pagination btn btn-sm"> {{ $data->withQueryString()->links() }} </ul>
         </nav>
         
     </div>

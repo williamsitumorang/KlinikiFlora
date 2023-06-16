@@ -49,7 +49,7 @@
 
     <div class="container card">
         <div class="container mt-1">
-            <p>showing <strong>{{ $pagination->firstItem() }} - {{ $pagination->lastItem() }} </strong> dari <strong> {{ $pagination->total() }} </strong>  item</p>
+            <p>showing <strong>{{ $pagination->firstItem() }} - </strong> <strong> {{ $pagination->total() }} </strong>  item</p>
         </div>
     <span class="counter pull-right"></span>
     <table class="table table-hover table-bordered results table-sm">
@@ -57,11 +57,12 @@
         <tr class="table-info text-center" >
           <th>#</th>
           <th scope="col">Nama Pasien</th>
+          <th scope="col">Tanggal lahir</th>
           <th scope="col">Gender</th>
           <th scope="col">Nomor HP</th>
           <th scope="col">Address</th>
-          <th scope="col">Nama Obat</th>
-          <th scope="col">Jumlah Obat</th>
+          {{-- <th scope="col">Nama Obat</th> --}}
+          <th hidden scope="col">Jumlah Obat</th>
           <th scope="col">Action</th>
           {{-- <th scope="col">Action</th> --}}
         </tr>
@@ -74,14 +75,12 @@
         <tr >
             <th scope="row">{{ $report->id }}</th>
             <td>{{ $report->name }}</td>
+            <td>{{ $report->tanggal_lahir }}</td>
             <td>{{ $report->gender }}</td>
             <td>{{ $report->phone_number }}</td>
             <td>{{ $report->address }}</td>
-            <td>{{ $report->nama_obat }}</td>
-            <td>
-                <ol>
+            <td hidden>
                     {{ $report->jumlah_dipakai }}</td>
-                </ol>
             <td>
                 <a href="#" rel="tooltip" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal{{ $report->id }}">
                     <i>Lihat Selengkapnya...</i>
@@ -102,14 +101,22 @@
                             <label for="recipient-name" class="col-form-label">Keluhan:</label>
                             <p id="recipient-name"> {{ $report->keluhan }} </p>
                             </div>
+
                             <div class="form-group">
                             <label for="message-text" class="col-form-label">Diagnosa:</label>
                             <p id="recipient-name"> {{ $report->diagnosa }} </p>
                             </div>
+
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">Obat yang diberikan</label>
+                                <p id="recipient-name"> {{ $report->jumlah_dipakai }}{{ $report->nama_obat }} {{ $report->jumlah_dipakai2 }} {{ $report->jumlah_dipakai3 }} {{ $report->jumlah_dipakai4 }}{{ $report->jumlah_dipakai5 }}   </p>
+                            </div>
+
                         </form>
                         </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <div class="modal-footer d-flex justify-content-between">
+                            <p class="text-left text-sm">Dibuat pada: {{ $report->created_at }} </p>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                     </div>
@@ -117,6 +124,15 @@
 
             </td>
             
+
+          </tr>
+          @endforeach
+      </tbody>
+    </table>
+
+</div>
+@endsection 
+
         {{-- <table class="table table-hover results table-sm">
         <thead>
           <tr class="table-info text-center" >
@@ -165,14 +181,3 @@
                     </form>
                 </div>
             </td> --}}
-          </tr>
-          @endforeach
-      </tbody>
-    </table>
-
-    <nav class="pagination mb-3 justify-content-end">
-        <ul class="pagination btn btn-sm btn-info"> {{ $pagination->withQueryString()->links() }} </ul>
-    </nav>
-
-</div>
-@endsection 

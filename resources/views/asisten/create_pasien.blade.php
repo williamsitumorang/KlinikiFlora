@@ -59,6 +59,37 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="tanggal_lahir" class="col-md-4 col-form-label text-md-right">{{ __('Tanggal Lahir') }}</label>
+
+                            <div class="col-md-6 mb-3 input-group date">
+                                
+                                <input id="tanggal_lahir" type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" required autocomplete="tanggal_lahir">
+
+                                @error('tanggal_lahir')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        
+
+                        {{-- <div class="form-group row">
+                            <label for="umur" class="col-md-4 col-form-label text-md-right">{{ __('Umur') }}</label>
+
+                            <div class="col-md-6 mb-3 input-group date">
+                                
+                                <input id="umur" type="number" class="form-control @error('umur') is-invalid @enderror" name="umur" value="{{ old('umur') }}" required autocomplete="umur">
+
+                                @error('umur')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div> --}}
+
+                        <div class="form-group row">
                             <label for="gender" class="col-md-4 col-form-label text-md-right" >{{ __('Jenis_Kelamin') }}</label>
 
                             <div class="col-md-6 mb-3">

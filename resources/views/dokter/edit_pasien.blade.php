@@ -63,6 +63,20 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="tanggal_lahir" class="col-md-4 col-form-label text-md-right">{{ __('Tanggal Lahir') }}</label>
+
+                            <div class="col-md-6 mb-3">
+                              <input type="date" name='tanggal_lahir' value = "{{$patient['tanggal_lahir']}}" placeholder="Tanggal Lahir Baru..." id="tanggal_lahir" class="form-control @error('tanggal_lahir') is-invalid @enderror" required autocomplete="tanggal_lahir" >
+
+                                @error('tanggal_lahir')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="gender" class="col-md-4 col-form-label text-md-right" >{{ __('Jenis_Kelamin') }}</label>
 
                             <div class="col-md-6 mb-3">

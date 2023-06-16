@@ -39,13 +39,21 @@ class CreateObatController extends Controller
         return redirect()->back()->with('success', 'Data Obat Telah Ditambahkan');
     }
 
-    public function show(){
-        // $medical = DB::select('CALL view_create_medical');
-        // return view('asisten.show_pasien', ['patient' => $patient]);
-        $data = Obat::all(); // mengambil semua data
-        $data = DB::table('obats')->paginate(5);
-        return view('asisten.show_obat', ['data' => $data,]);
+    public function show(Request $request) {
+        $filter = $request->input('filter');
+    
+        if ($filter == 'habis') {
+            $data = Obat::where('jumlah', 0)->whereNull('deleted_at')->paginate(5);
+        } elseif ($filter == 'tersedia') {
+            $data = Obat::where('jumlah', '>', 0)->whereNull('deleted_at')->paginate(5);
+        } else {
+            $data = Obat::whereNull('deleted_at')->paginate(5);
+        }
+    
+        return view('asisten.show_obat', ['data' => $data, 'filter' => $filter]);
     }
+
+    
 
     public function destroy($id){
         $data = Obat::findOrFail($id);

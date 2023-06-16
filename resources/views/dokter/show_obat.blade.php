@@ -55,6 +55,17 @@
 
     <span class="counter pull-right"></span>
 
+    <div class="dropdown mb-1">
+        <button class="btn btn-sm btn-info dropdown-toggle" type="button" id="filterDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Filter
+        </button>
+        <div class="dropdown-menu" aria-labelledby="filterDropdown">
+            <a class="dropdown-item" href="{{ route('obat.show.dokter') }}">Semua</a>
+            <a class="dropdown-item" href="{{ route('obat.show.dokter', ['filter' => 'tersedia']) }}">Tersedia</a>
+            <a class="dropdown-item" href="{{ route('obat.show.dokter', ['filter' => 'habis']) }}">Habis</a>
+        </div>
+    </div>
+
     <table class="table table-hover table-bordered results table-sm">
       <thead>
         <tr class="table-info text-center" >
@@ -85,32 +96,17 @@
                     <span class="true text-white">{{ __('Tersedia') }}</span>
                 @endif
             </td>
-            {{-- <td>
-                <div class="btn-group" role="group">
-
-                    <a href={{url('/obats/redirect', $obat->id)}}>
-                    <button type="button" rel="tooltip" class="btn btn-success btn-just-icon btn-sm mr-1" data-original-title="" title="">
-                        <i class="material-icons">edit</i>
-                    </button>
-                    </a>
-                    
-                    <form action="{{ route('delete.obat', $obat->id) }}" method="POST" onsubmit="return confirm('Anda yakin ingin menghapus data ini?');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm">
-                            <i class="material-icons">close</i>
-                        </button>
-                    </form>
-                </div>
-            </td> --}}
           </tr>
           @endforeach
       </tbody>
     </table>
 
     <nav class="pagination mb-3 justify-content-end">
-        <ul class="pagination btn btn-sm btn-info"> {{ $data->withQueryString()->links() }} </ul>
+        <ul class="pagination btn btn-sm"> {{ $data->withQueryString()->links() }} </ul>
     </nav>
     
 </div>
+
 @endsection 
+
+

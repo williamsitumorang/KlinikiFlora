@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Patient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class CreatePatientController extends Controller
@@ -21,16 +22,26 @@ class CreatePatientController extends Controller
         $patient->gender = $request->gender;
         $patient->phone_number = $request->phone_number;
         $patient->address = $request->address;
+        $patient->tanggal_lahir = $request->tanggal_lahir;
  
         $patient->save();
  
         return redirect()->back()->with('success', 'Data Pasien Telah Ditambahkan');
     }
 
-    public function show(){
-        // return view('asisten.show_pasien', ['patient' => $patient]);
-        $data = Patient::all();
-        $data = DB::table('patients')->paginate(5); // mengambil semua data
+    public function show()
+    {
+        $data = Patient::whereNull('deleted_at')->paginate(5);
+    
+        // Menghitung umur dan mengubah format tanggal lahir pada semua objek pasien
+        $data->map(function ($patient) {
+            $birthdate = Carbon::parse($patient->tanggal_lahir);
+            $age = $birthdate->diffInYears(Carbon::now());
+            $patient->umur = $age;
+            $patient->tanggal_lahir = $birthdate->isoFormat('D MMMM YYYY');
+            return $patient;
+        });
+    
         return view('asisten.show_pasien', ['data' => $data]);
     }
 

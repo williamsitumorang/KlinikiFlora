@@ -52,7 +52,19 @@
             <p>showing <strong>{{ $data->firstItem() }} - {{ $data->lastItem() }} </strong> dari <strong> {{ $data->total() }} </strong>  item</p>
         </div>
     <span class="counter pull-right"></span>
-    <table class="table table-hover results table-sm">
+
+    <div class="dropdown mb-1">
+        <button class="btn btn-sm btn-info dropdown-toggle" type="button" id="filterDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Filter
+        </button>
+        <div class="dropdown-menu" aria-labelledby="filterDropdown">
+            <a class="dropdown-item" href="{{ route('obat.show') }}">Semua</a>
+            <a class="dropdown-item" href="{{ route('obat.show', ['filter' => 'tersedia']) }}">Tersedia</a>
+            <a class="dropdown-item" href="{{ route('obat.show', ['filter' => 'habis']) }}">Habis</a>
+        </div>
+    </div>
+
+    <table class="table table-hover table-bordered results table-sm">
       <thead>
         <tr class="table-info text-center" >
           <th>#</th>

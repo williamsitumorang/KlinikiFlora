@@ -50,6 +50,8 @@ Route::group(['middleware' => ['auth', 'checkrole:1,2']], function() {
 // untuk dokter
 Route::group(['middleware' => ['auth', 'checkrole:1']], function() {
     Route::get('/dokter', [DokterController::class, 'index']);
+
+    
 });
 
 // untuk asisten
@@ -57,6 +59,11 @@ Route::group(['middleware' => ['auth', 'checkrole:2']], function() {
     Route::get('/asisten', [AsistenController::class, 'index']);
 
 });
+
+Route::get('/Fmedical', function () {
+    return view ('dokter.form');
+});
+
 
 //createAsisten
 Route::get('/addAkun', function () {
@@ -180,6 +187,8 @@ Route::get('/index/pasien/{id}',[MedicalRecordController::class, 'getID'])->name
 Route::get('/add/view/',[MedicalRecordController::class, 'index'])->name('mRecord.create.view');
 
 Route::post('/medical/record',[MedicalRecordController::class,'store'])->name('mRecord.store');
+
+
 
 // Route::get('/pencarian-obat', 'MedicalRecordController@pencarianObat')->name('pencarian.obat');
 

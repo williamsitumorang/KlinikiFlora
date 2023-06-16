@@ -57,6 +57,8 @@
         <tr class="table-info text-center" >
           <th>#</th>
           <th scope="col">Nama</th>
+          <th scope="col">Tanggal Lahir</th>
+          <th scope="col">Umur</th>
           <th scope="col">Jenis Kelamin</th>
           <th scope="col">No. Telepon</th>
           <th scope="col">Alamat</th>
@@ -71,6 +73,8 @@
         <tr >
             <th scope="row">{{ $item->id }}</th>
             <td>{{ $item->name }}</td>
+            <td>{{ \Carbon\Carbon::parse($item->tanggal_lahir)->isoFormat('D MMMM YYYY') }}</td>
+            <td>{{ \Carbon\Carbon::parse($item->tanggal_lahir)->diffInYears(\Carbon\Carbon::now()) }}</td>
             <td>{{ $item->gender }}</td>
             <td>{{ $item->phone_number }}</td>
             <td>{{ $item->address }}</td>
