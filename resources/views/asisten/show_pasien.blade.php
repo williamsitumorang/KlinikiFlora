@@ -24,6 +24,10 @@
         </div><!-- /.container-fluid -->
     </div>
 
+    @if ($data->isEmpty())
+    <p class="font-monospace fw-bolder fs-1 text-center text-muted">Belum Ada Data Pasien</p>
+    @else
+
     <div class="container">
         <div class="form-group pull-right">
             <input type="text" class="search form-control" placeholder="Search.....">
@@ -80,11 +84,6 @@
             <td>{{ $item->address }}</td>
             <td>
                 <div class="btn-group" role="group">
-                    {{-- <form action="" method="POST" onsubmit="return confirm('Anda yakin ingin menghapus data ini?');">
-                    <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" data-original-title="" title="">
-                        <i class="material-icons">person</i>
-                    </button>
-                    </form> --}}
 
                     <a href={{route('patients.edit', $item->id)}}>
                     <button type="submit" rel="tooltip" class="btn btn-success btn-just-icon btn-sm mr-1" data-original-title="" title="">
@@ -92,67 +91,23 @@
                     </button>
                     </a>
                     
-                    <form action="{{ route('delete.pasien', $item->id) }}" method="POST" onsubmit="return confirm('Anda yakin ingin menghapus data ini?');">
+                    {{-- <form action="{{ route('delete.pasien', $item->id) }}" method="POST" id="deleteForm">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm">
+                        <button type="submit" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm" id="delete">
                             <i class="material-icons">close</i>
                         </button>
-                    </form>
+                    </form> --}}
                 </div>
             </td>
           </tr>
           @endforeach
       </tbody>
     </table>
+    @endif
+
         <nav class="pagination mb-3 justify-content-end">
             <ul class="pagination btn btn-sm"> {{ $data->withQueryString()->links() }} </ul>
         </nav>
 </div>
 @endsection
-
-
-
-
-{{-- <div class="container">
-    <div class="title">
-        <h3>Tables</h3>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h4>Simple Table</h4>
-        </div>
-        <div class="col-lg-8 col-md-10 ml-auto mr-auto">
-        <h4><small>Simple With Actions</small></h4>
-            <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th class="text-center">#</th>
-                        <th>Name</th>
-                        <th>Job Position</th>
-                        <th>Since</th>
-                        <th class="text-right">Salary</th>
-                        <th class="text-right">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="text-center">1</td>
-                        <td>Andrew Mike</td>
-                        <td>Develop</td>
-                        <td>2013</td>
-                        <td class="text-right">€ 99,225</td>
-                        <td class="td-actions text-right">
-                            <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" data-original-title="" title="">
-                                <i class="material-icons">person</i>
-                            </button>
-                            <button type="button" rel="tooltip" class="btn btn-success btn-just-icon btn-sm" data-original-title="" title="">
-                                <i class="material-icons">edit</i>
-                            </button>
-                            <button type="button" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm" data-original-title="" title="">
-                                <i class="material-icons">close</i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr> --}}

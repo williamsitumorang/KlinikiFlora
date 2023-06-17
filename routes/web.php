@@ -29,7 +29,7 @@ use Collective\Html\HtmlFacade as Html;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('auth.login');
 });
 
 //middleware role
@@ -51,26 +51,84 @@ Route::group(['middleware' => ['auth', 'checkrole:1,2']], function() {
 Route::group(['middleware' => ['auth', 'checkrole:1']], function() {
     Route::get('/dokter', [DokterController::class, 'index']);
 
-    
+        //createAsisten
+    Route::get('/addAkun', function () {
+        return view ('dokter.addAkun');
+    });
+
+    Route::get('/createAsisten', function () {
+        return view ('dokter.create');
+    });
+
+    //menampilkan akun asisten
+    Route::get('/showAkun', [AuthController::class, 'showAccount'])->name('showAkun');
+
+    Route::get('/getasisten',[AsistenController::class, 'show']);
+
+    //menghapus akun asisten
+
+    Route::delete('/deleteAkun{id}', [AuthController::class, 'destroy'])->name('deleteAkun');
+
+
+    Route::post('/createAsisten', [CreateAsistenController::class, 'store'])->name('asisten.create');
+
+    Route::get('/patients/show/dokter',[ShowPasienController::class, 'show'])->name('patients.show.dokter');
+
+    Route::get('/obat/show/dokter',[ShowPasienController::class, 'show2'])->name('obat.show.dokter');
+
+    Route::get('/Medical/show',[MedicalRecordController::class, 'show'])->name('medical.show');
+
+    Route::get('/show-user/{id}',[MedicalRecordController::class, 'button'])->name('show.patient');
+
+    Route::put('/pasien/edit/{patient}', [ShowPasienController::class,'update'])->name('dokter.patients.update');
+
+    Route::get('/pasien/redirect{patient}',[ShowPasienController::class, 'edit'])->name('dokter.patients.edit');
+
+    Route::delete('/deletePatient{id}', [ShowPasienController::class, 'gone'])->name('dokter.delete.pasien');
+
+        //medicalRecord
+
+    Route::get('/index/pasien/{id}',[MedicalRecordController::class, 'getID'])->name('index.pasien.form');
+
+    Route::get('/add/view/',[MedicalRecordController::class, 'index'])->name('mRecord.create.view');
+
+    Route::post('/medical/record',[MedicalRecordController::class,'store'])->name('mRecord.store');
+
+    Route::get('/form/medical',[MedicalRecordController::class,'index2'])->name('FormMedical');
 });
 
 // untuk asisten
 Route::group(['middleware' => ['auth', 'checkrole:2']], function() {
     Route::get('/asisten', [AsistenController::class, 'index']);
 
+        //pasien
+    Route::get('/patients/create',[CreatePatientController::class, 'create'])->name('patients.create');
+
+    Route::post('patients',[CreatePatientController::class,'store'])->name('patients.store');
+
+    Route::get('/patients/show',[CreatePatientController::class, 'show'])->name('patients.show');
+
+    Route::delete('/deletePasien{id}', [CreatePatientController::class, 'gone'])->name('delete.pasien');
+
+    Route::get('/patients/redirect{patient}',[CreatePatientController::class, 'edit'])->name('patients.edit');
+
+    Route::put('/patients/edit/{patient}', [CreatePatientController::class,'update'])->name('patients.update');
+
+        //obat
+
+    Route::get('/obat/create',[CreateObatController::class, 'index'])->name('obat.create');
+
+    Route::post('/obat',[CreateObatController::class,'store'])->name('obat.store');
+
+    Route::get('/obat/show',[CreateObatController::class, 'show'])->name('obat.show');
+
+    Route::delete('/deleteObat{id}', [CreateObatController::class, 'destroy'])->name('delete.obat');
+
+    Route::get('/obats/redirect/{obat}',[CreateObatController::class, 'edit'])->name('obat.edit');
+
+    Route::put('/obats/edit/{obat}', [CreateObatController::class,'update'])->name('obat.update');
+
 });
-
-
-//createAsisten
-Route::get('/addAkun', function () {
-    return view ('dokter.addAkun');
-});
-
-Route::get('/createAsisten', function () {
-    return view ('dokter.create');
-});
-
-Route::post('/createAsisten', [CreateAsistenController::class, 'store'])->name('asisten.create');
 
 //forgotPassword
 
@@ -122,84 +180,6 @@ Route::post('/reset-password', function (Request $request) {
                 : back()->withErrors(['email' => [__($status)]]);
 })->middleware('guest')->name('password.update');
 
-//menampilkan akun asisten
-Route::get('/showAkun', [AuthController::class, 'showAccount'])->name('showAkun');
-
-Route::get('/getasisten',[AsistenController::class, 'show']);
-
-//menghapus akun asisten
-// Route::delete('/admin/users/{id}', 'UserController@destroy')->name('admin.users.destroy');
-Route::delete('/deleteAkun{id}', [AuthController::class, 'destroy'])->name('deleteAkun');
-
-Route::post('/updateProfil', [AuthController::class, 'updateProfile'])->name('user.updateProfile');
-
-
-//route asisten dokter
-
-    //pasien
-Route::get('/patients/create',[CreatePatientController::class, 'create'])->name('patients.create');
-
-Route::post('patients',[CreatePatientController::class,'store'])->name('patients.store');
-
-Route::get('/patients/show',[CreatePatientController::class, 'show'])->name('patients.show');
-
-Route::delete('/deletePasien{id}', [CreatePatientController::class, 'gone'])->name('delete.pasien');
-
-Route::get('/patients/redirect{patient}',[CreatePatientController::class, 'edit'])->name('patients.edit');
-
-Route::put('/patients/edit/{patient}', [CreatePatientController::class,'update'])->name('patients.update');
-
-    //obat
-
-Route::get('/obat/create',[CreateObatController::class, 'index'])->name('obat.create');
-
-Route::post('/obat',[CreateObatController::class,'store'])->name('obat.store');
-
-Route::get('/obat/show',[CreateObatController::class, 'show'])->name('obat.show');
-
-Route::delete('/deleteObat{id}', [CreateObatController::class, 'destroy'])->name('delete.obat');
-
-Route::get('/obats/redirect/{obat}',[CreateObatController::class, 'edit'])->name('obat.edit');
-
-Route::put('/obats/edit/{obat}', [CreateObatController::class,'update'])->name('obat.update');
-
-//route Dokter
-Route::get('/patients/show/dokter',[ShowPasienController::class, 'show'])->name('patients.show.dokter');
-
-Route::get('/obat/show/dokter',[ShowPasienController::class, 'show2'])->name('obat.show.dokter');
-
-Route::get('/Medical/show',[MedicalRecordController::class, 'show'])->name('medical.show');
-
-Route::get('/show-user/{id}',[MedicalRecordController::class, 'button'])->name('show.patient');
-
-Route::put('/pasien/edit/{patient}', [ShowPasienController::class,'update'])->name('dokter.patients.update');
-
-Route::get('/pasien/redirect{patient}',[ShowPasienController::class, 'edit'])->name('dokter.patients.edit');
-
-Route::delete('/deletePatient{id}', [ShowPasienController::class, 'gone'])->name('dokter.delete.pasien');
-
-    //medicalRecord
-
-Route::get('/index/pasien/{id}',[MedicalRecordController::class, 'getID'])->name('index.pasien.form');
-
-Route::get('/add/view/',[MedicalRecordController::class, 'index'])->name('mRecord.create.view');
-
-Route::post('/medical/record',[MedicalRecordController::class,'store'])->name('mRecord.store');
-
-Route::get('/form/medical',[MedicalRecordController::class,'index2'])->name('FormMedical');
-
-
-
-
-// Route::get('/pencarian-obat', 'MedicalRecordController@pencarianObat')->name('pencarian.obat');
-
-
-// Route::post('/medicine/add', [MedicalRecordController::class, 'addMedicine'])->name('medicine.add');
-
-// Route::post('/simpan-data', [MedicalRecordController::class, 'simpanData'])->name('medical-record.simpan');
-
-
-// Route::post('/simpan-obat', [MedicalRecordController::class, 'saveMedicine'])->name('save.medicine');
 
 
 

@@ -10,19 +10,23 @@
 
     <div class="content-header">
         <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item active">Tabel</li>
-                <li class="breadcrumb-item active">Tabel Obat</li>
-            </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item active">Tabel</li>
+                    <li class="breadcrumb-item active">Tabel Obat</li>
+                </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
         </div><!-- /.container-fluid -->
-        </div>
+    </div>
     
+    @if ($data->isEmpty())
+        <p class="font-monospace fw-bolder fs-1 text-center text-muted">Belum Ada Data Obat</p>
+    @else
+
     <div class="container">
         <div class="form-group pull-right">
             <input type="text" class="search form-control" placeholder="Search.....">
@@ -48,6 +52,7 @@
     </div>
 
     <div class="container card">
+        
         <div class="container mt-1">
             <p>showing <strong>{{ $data->firstItem() }} - {{ $data->lastItem() }} </strong> dari <strong> {{ $data->total() }} </strong>  item</p>
         </div>
@@ -63,6 +68,8 @@
             <a class="dropdown-item" href="{{ route('obat.show', ['filter' => 'habis']) }}">Habis</a>
         </div>
     </div>
+
+    
 
     <table class="table table-hover table-bordered results table-sm">
       <thead>
@@ -105,11 +112,11 @@
                     </button>
                     </a>
                     
-                    <form action="{{ route('delete.obat', $obat->id) }}" method="POST" onsubmit=    "return confirm('Anda yakin ingin menghapus data ini?');">
+                    <form action="{{ route('delete.obat', $obat->id) }}" method="POST" id="deleteForm">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm">
-                            <i class="material-icons">close</i>
+                        <button type="submit" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm" id="delete">
+                            <i class="material-icons">close</i> 
                         </button>
                     </form>
                 </div>
@@ -119,9 +126,16 @@
       </tbody>
     </table>
 
+    @endif
+
     <nav class="pagination mb-3 justify-content-end">
         <ul class="pagination btn btn-sm"> {{ $data->withQueryString()->links() }} </ul>
     </nav>
+
+</div>
+@endsection
+
+
 
     {{-- BUAT SNDIRI SARAH --}}
 
@@ -154,5 +168,3 @@
             @endforeach
         </tbody>
       </table> --}}
-</div>
-@endsection

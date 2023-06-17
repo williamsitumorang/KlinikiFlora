@@ -22,6 +22,10 @@
         </div><!-- /.row -->
         </div><!-- /.container-fluid -->
         </div>
+
+    @if ($data->isEmpty())
+        <p class="font-monospace fw-bolder fs-1 text-center text-muted">Belum Ada Data Obat</p>
+    @else
     
     <div class="container">
         <div class="form-group pull-right">
@@ -100,6 +104,7 @@
           @endforeach
       </tbody>
     </table>
+    @endif
 
     <nav class="pagination mb-3 justify-content-end">
         <ul class="pagination btn btn-sm"> {{ $data->withQueryString()->links() }} </ul>

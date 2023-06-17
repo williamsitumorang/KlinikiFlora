@@ -24,6 +24,11 @@
         </div><!-- /.container-fluid -->
     </div>
 
+    @if ($data->isEmpty())
+    <p class="font-monospace fw-bolder fs-1 text-center text-muted">Belum Ada Data Rekam Pasien </p>
+    <p class="font-monospace fw-bolder fs-1 text-center text-muted"> Untuk dibuat Rekam Medis </p>
+    @else
+    
     <div class="container">
         <div class="form-group pull-right">
             <input type="text" class="search form-control" placeholder="Search.....">
@@ -105,6 +110,8 @@
           @endforeach
       </tbody>
     </table>
+
+    @endif
         <nav class="pagination mb-3 justify-content-end">
             <ul class="pagination btn btn-sm"> {{ $data->withQueryString()->links() }} </ul>
         </nav>

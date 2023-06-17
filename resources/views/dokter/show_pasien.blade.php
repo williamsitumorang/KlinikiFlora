@@ -24,6 +24,10 @@
         </div><!-- /.container-fluid -->
     </div>
 
+    @if ($data->isEmpty())
+    <p class="font-monospace fw-bolder fs-1 text-center text-muted">Belum Ada Data Pasien</p>
+    @else
+
     <div class="container">
         <div class="form-group pull-right">
             <input type="text" class="search form-control" placeholder="Search.....">
@@ -95,13 +99,13 @@
                     </button>
                     </a>
                     
-                    <form action="{{ route('dokter.delete.pasien', $item->id) }}" method="POST" onsubmit="return confirm('Anda yakin ingin menghapus data ini?');">
+                    {{-- <form action="{{ route('dokter.delete.pasien', $item->id) }}" method="POST" onsubmit="return confirm('Anda yakin ingin menghapus data ini?');">
                         @csrf
                         @method('DELETE')
                         <button type="submit" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm">
                             <i class="material-icons">close</i>
                         </button>
-                    </form>
+                    </form> --}}
                 </div>
             </td>
           </tr>
@@ -110,6 +114,7 @@
       </tbody>
       
     </table>
+    @endif
 
         <nav class="pagination mb-3 justify-content-end">
             <ul class="pagination btn btn-sm"> {{ $data->withQueryString()->links() }} </ul>

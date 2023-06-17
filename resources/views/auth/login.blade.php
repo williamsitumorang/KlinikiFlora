@@ -29,25 +29,6 @@
   </div>
 @endif
 
-{{-- @error('email')
-    <div class="position-fixed top-0 end-0 mt-2 me-2">
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
-            {{ $message }}
-        </div>
-    </div>
-@endif
-
-@if(session()->has('eror'))
-
-    <div class="position-fixed top-0 end-0 mt-2 me-2">
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
-            {{ session('error') }}
-        </div>
-    </div>
-@endif --}}
-
 
 <body class="my-login-page">
 	<section class="h-100">
