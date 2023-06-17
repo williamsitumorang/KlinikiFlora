@@ -60,10 +60,6 @@ Route::group(['middleware' => ['auth', 'checkrole:2']], function() {
 
 });
 
-Route::get('/Fmedical', function () {
-    return view ('dokter.form');
-});
-
 
 //createAsisten
 Route::get('/addAkun', function () {
@@ -174,6 +170,8 @@ Route::get('/obat/show/dokter',[ShowPasienController::class, 'show2'])->name('ob
 
 Route::get('/Medical/show',[MedicalRecordController::class, 'show'])->name('medical.show');
 
+Route::get('/show-user/{id}',[MedicalRecordController::class, 'button'])->name('show.patient');
+
 Route::put('/pasien/edit/{patient}', [ShowPasienController::class,'update'])->name('dokter.patients.update');
 
 Route::get('/pasien/redirect{patient}',[ShowPasienController::class, 'edit'])->name('dokter.patients.edit');
@@ -187,6 +185,9 @@ Route::get('/index/pasien/{id}',[MedicalRecordController::class, 'getID'])->name
 Route::get('/add/view/',[MedicalRecordController::class, 'index'])->name('mRecord.create.view');
 
 Route::post('/medical/record',[MedicalRecordController::class,'store'])->name('mRecord.store');
+
+Route::get('/form/medical',[MedicalRecordController::class,'index2'])->name('FormMedical');
+
 
 
 

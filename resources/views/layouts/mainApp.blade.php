@@ -207,12 +207,6 @@
                 </a>
               </li>
 
-              <li class="nav-item">
-                <a href="{{ url('/Fmedical') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Record</p>
-                </a>
-              </li>
             </ul>
 
             

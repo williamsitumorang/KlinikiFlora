@@ -71,4 +71,6 @@ class ShowPasienController extends Controller
 
     //     return view('dokter.show_pasien', ['data' => $data, 'medical' => $medical]);
     // }
+
+
 }

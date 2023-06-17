@@ -33,4 +33,6 @@ class DokterController extends Controller
                 'countPasienHariIni' => $countPasienHariIni,
             ]);
         }
-}
+
+
+} 

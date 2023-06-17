@@ -90,7 +90,7 @@
             <td>{{ $obat->tanggal_masuk }}</td>
             <td>{{ $obat->jumlah }}</td>
             <td class="">
-                @if ($obat->jumlah == 0)
+                @if ($obat->jumlah <= 0)
                     <span class="false text-white">{{ __('Habis') }}</span>
                 @else
                     <span class="true text-white">{{ __('Tersedia') }}</span>

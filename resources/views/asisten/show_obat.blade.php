@@ -90,7 +90,7 @@
             <td>{{ $obat->jumlah }}</td>
             <td>{{ $obat->kemasan }}</td>
             <td class="">
-                @if ($obat->jumlah == 0)
+                @if ($obat->jumlah <= 0)
                     <span class="false text-white">{{ __('Habis') }}</span>
                 @else
                     <span class="true text-white">{{ __('Tersedia') }}</span>
@@ -105,7 +105,7 @@
                     </button>
                     </a>
                     
-                    <form action="{{ route('delete.obat', $obat->id) }}" method="POST" onsubmit="return confirm('Anda yakin ingin menghapus data ini?');">
+                    <form action="{{ route('delete.obat', $obat->id) }}" method="POST" onsubmit=    "return confirm('Anda yakin ingin menghapus data ini?');">
                         @csrf
                         @method('DELETE')
                         <button type="submit" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm">

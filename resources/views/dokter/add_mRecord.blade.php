@@ -100,6 +100,30 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="keluhan" class="col-md-4 col-form-label text-md-right">{{ __('Tinggi Badan') }}</label>
+                            <div class="col-md-6 mb-3">
+                                <input id="tinggi" placeholder="" type="number" class=" form-control @error('tinggi') is-invalid @enderror" name="tinggi" value="{{ old('tinggi') }}" autocomplete="tinggi">
+                                @error('tinggi')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="keluhan" class="col-md-4 col-form-label text-md-right">{{ __('Berat Badan') }}</label>
+                            <div class="col-md-6 mb-3">
+                                <input id="berat" placeholder="" type="number" class=" form-control @error('berat') is-invalid @enderror" name="berat" value="{{ old('berat') }}" autocomplete="berat">
+                                @error('berat')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="keluhan" class="col-md-4 col-form-label text-md-right">{{ __('Keluhan') }}</label>
                             <div class="col-md-6 mb-3">
                                 <textarea id="keluhan" type="text" class="form-control @error('keluhan') is-invalid @enderror" name="keluhan" value="{{ old('keterangan') }}" required autocomplete="keluhan"></textarea>
