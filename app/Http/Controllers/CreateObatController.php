@@ -23,6 +23,8 @@ class CreateObatController extends Controller
         $obat->tanggal_masuk = $request->tanggal_masuk;
         $obat->jumlah = $request->jumlah;
         $obat->kemasan = $request->kemasan;
+        $obat->singkatan = $request->singkatan;
+        $obat->ukuran = $request->ukuran;
         $jumlah = $request->jumlah;
     
         if ($jumlah == 0) {
@@ -75,6 +77,7 @@ class CreateObatController extends Controller
         $obat->tanggal_masuk= $request->tanggal_masuk;
         $obat->jumlah = $request->jumlah;
         $obat->kemasan = $request->kemasan;
+        $obat->singkatan = $request->singkatan;
         $obat->update();
 
         return redirect()->route('obat.show');

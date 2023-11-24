@@ -25,7 +25,7 @@
     </div>
 
     @if ($data->isEmpty())
-    <p class="font-monospace fw-bolder fs-1 text-center text-muted">Belum Ada Data Rekam Pasien </p>
+    <p class="font-monospace fw-bolder fs-1 text-center text-muted">Belum Ada Data Pasien </p>
     <p class="font-monospace fw-bolder fs-1 text-center text-muted"> Untuk dibuat Rekam Medis </p>
     @else
     

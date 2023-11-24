@@ -99,21 +99,38 @@ class MedicalRecordController extends Controller
                 medical_record.jumlah_dipakai3,
                 medical_record.jumlah_dipakai4,
                 medical_record.jumlah_dipakai5,
-                medical_record.diagnosa,
+                medical_record.aturan,
+                medical_record.aturan2,
+                medical_record.aturan3,
+                medical_record.aturan4,
+                medical_record.aturan5,
+                medical_record.aturan5,
+                medical_record.keterangan,
+                medical_record.keterangan2,
+                medical_record.keterangan3,
+                medical_record.keterangan4,
+                medical_record.keterangan5,
                 medical_record.tinggi,
                 medical_record.berat,
                 medical_record.keluhan,
                 medical_record.created_at,
+                medical_record.diagnosa,
+                medical_record.jenis_penyakit,
                 obats1.nama_obat AS nama_obat1,
                 obats1.kemasan AS kemasan1,
+                obats1.ukuran AS ukuran1,
                 obats2.nama_obat AS nama_obat2,
                 obats2.kemasan AS kemasan2,
+                obats2.ukuran AS ukuran2,
                 obats3.nama_obat AS nama_obat3,
                 obats3.kemasan AS kemasan3,
+                obats3.ukuran AS ukuran3,
                 obats4.nama_obat AS nama_obat4,
                 obats4.kemasan AS kemasan4,
+                obats4.ukuran AS ukuran4,
                 obats5.nama_obat AS nama_obat5,
-                obats5.kemasan AS kemasan5
+                obats5.kemasan AS kemasan5,
+                obats5.ukuran AS ukuran5
             FROM
                 medical_record
             JOIN obats AS obats1 ON medical_record.obat_id = obats1.id
@@ -189,10 +206,21 @@ class MedicalRecordController extends Controller
     $medicalRecord->jumlah_dipakai3 = $request->jumlah_dipakai3;
     $medicalRecord->jumlah_dipakai4 = $request->jumlah_dipakai4;
     $medicalRecord->jumlah_dipakai5 = $request->jumlah_dipakai5;
+    $medicalRecord->aturan = $request->aturan;
+    $medicalRecord->aturan2 = $request->aturan2;
+    $medicalRecord->aturan3 = $request->aturan3;
+    $medicalRecord->aturan4 = $request->aturan4;
+    $medicalRecord->aturan5 = $request->aturan5;
+    $medicalRecord->keterangan = $request->keterangan;
+    $medicalRecord->keterangan2 = $request->keterangan2;
+    $medicalRecord->keterangan3 = $request->keterangan3;
+    $medicalRecord->keterangan4 = $request->keterangan4;
+    $medicalRecord->keterangan5 = $request->keterangan5;
     $medicalRecord->diagnosa = $request->diagnosa;
     $medicalRecord->keluhan = $request->keluhan;
     $medicalRecord->tinggi = $request->tinggi;
     $medicalRecord->berat = $request->berat;
+    $medicalRecord->jenis_penyakit = $request->jenis_penyakit;
     $medicalRecord->save();
 
     $obat = Obat::find($request->obat);

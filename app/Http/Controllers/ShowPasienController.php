@@ -55,6 +55,7 @@ class ShowPasienController extends Controller
     public function update (Request $request , Patient $patient){
         // $patient->id = $request->id;
         $patient->name = $request->name;
+        $patient->tanggal_lahir = $request->tanggal_lahir;
         $patient->gender = $request->gender;
         $patient->phone_number= $request->phone_number;
         $patient->address = $request->address;

@@ -20,6 +20,7 @@ class CreatePatientController extends Controller
         
         $patient->name = $request->name;
         $patient->gender = $request->gender;
+        $patient->wali = $request->wali;
         $patient->phone_number = $request->phone_number;
         $patient->address = $request->address;
         $patient->tanggal_lahir = $request->tanggal_lahir;
@@ -61,6 +62,7 @@ class CreatePatientController extends Controller
     public function update (Request $request , Patient $patient){
         // $patient->id = $request->id;
         $patient->name = $request->name;
+        $patient->tanggal_lahir = $request->tanggal_lahir;
         $patient->gender = $request->gender;
         $patient->phone_number= $request->phone_number;
         $patient->address = $request->address;

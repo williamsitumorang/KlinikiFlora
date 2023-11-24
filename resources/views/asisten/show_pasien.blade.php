@@ -64,6 +64,7 @@
           <th scope="col">Tanggal Lahir</th>
           <th scope="col">Umur</th>
           <th scope="col">Jenis Kelamin</th>
+          <th scope="col">Orang Tua/Wali</th>
           <th scope="col">No. Telepon</th>
           <th scope="col">Alamat</th>
           <th scope="col">Action</th>
@@ -80,6 +81,7 @@
             <td>{{ \Carbon\Carbon::parse($item->tanggal_lahir)->isoFormat('D MMMM YYYY') }}</td>
             <td>{{ \Carbon\Carbon::parse($item->tanggal_lahir)->diffInYears(\Carbon\Carbon::now()) }}</td>
             <td>{{ $item->gender }}</td>
+            <td>{{ $item->wali }}</td>
             <td>{{ $item->phone_number }}</td>
             <td>{{ $item->address }}</td>
             <td>

@@ -20,8 +20,11 @@ class DokterController extends Controller
             
             $count = Patient::count();
             $count2 = Obat::count();
-            $countTersedia = Obat::where('status', 'tersedia') -> count ();
-            $countTidakTersedia = Obat::where('status', 'tidak tersedia')->count();
+            $countTersedia = Obat::where('status', '=','Tersedia') -> count ();
+            $countTidakTersedia = Obat::where('status','=', 'Habis')->count();
+            $countKategoriRingan = MedicalRecord::where('jenis_penyakit', '=', 'Ringan')->count();
+            $countKategoriSedang = MedicalRecord::where('jenis_penyakit', '=','Sedang')->count();
+            $countKategoriBerat = MedicalRecord::where('jenis_penyakit', '=', 'Berat')->count();
             $countPasienHariIni = MedicalRecord::whereDate('created_at', Carbon::today())->count();
 
             return view('dokter.index',[
@@ -31,6 +34,10 @@ class DokterController extends Controller
                 'countTidakTersedia' => $countTidakTersedia, 
                 'countPerBulan' => $countPerBulan,
                 'countPasienHariIni' => $countPasienHariIni,
+                'countKategoriRingan' =>    $countKategoriRingan,
+                'countKategoriSedang' =>    $countKategoriSedang,
+                'countKategoriBerat' =>    $countKategoriBerat,
+
             ]);
         }
 

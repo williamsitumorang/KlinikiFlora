@@ -59,6 +59,21 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="singkatan" class="col-md-4 col-form-label text-md-right">{{ __('Singkatan Obat') }}</label>
+
+                            <div class="col-md-6 mb-3">
+                                <input id="singakatan" type="text" class="form-control @error('singkatan') is-invalid @enderror" name="singkatan" value="{{ old('singkatan') }}" required autocomplete="singkatan">
+
+                                @error('singkatan')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
                             <label for="keterangan" class="col-md-4 col-form-label text-md-right">{{ __('Keterangan Obat') }}</label>
 
                             <div class="col-md-6 mb-3">
@@ -126,6 +141,27 @@
                             </div>
                         </div>
                         
+                        <div class="form-group row">
+                            <label for="ukuran" class="col-md-4 col-form-label text-md-right">{{ __('Ukuran Obat') }}</label>
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group custom-dropdown">
+                                    <select id="ukuran" class="form-control @error('ukuran') is-invalid @enderror" name="ukuran" required>
+                                        <option selected disabled value="">Pilih Kemasan Terlebih Dahulu</option>
+                                    </select>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" data-toggle="dropdown">
+                                            <i class="fas fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                @error('ukuran')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        
                         
                 <div class="form-group row mb-3">
                     <div class="col-md-6 offset-md-4">
@@ -140,5 +176,105 @@
     </div>
     </div>
   </div>
-  
+
+@section('scripts')
+<script>
+    // Fungsi untuk mengisi dropdown ukuran obat berdasarkan pilihan kemasan
+    function fillUkuranDropdown(kemasan) {
+        var ukuranDropdown = document.getElementById("ukuran");
+        ukuranDropdown.innerHTML = ""; // Mengosongkan dropdown ukuran obat
+
+        if (kemasan === "Sirop") {
+            // Jika kemasan adalah Sirop, menambahkan pilihan ukuran obat Sirop
+            var option1 = document.createElement("option");
+            option1.value = "";
+            option1.text = "Pilih Ukuran Sirop";
+            ukuranDropdown.add(option1);
+
+            var option2 = document.createElement("option");
+            option2.value = "50ml";
+            option2.text = "50ml";
+            ukuranDropdown.add(option2);
+
+            var option3 = document.createElement("option");
+            option3.value = "100ml";
+            option3.text = "100ml";
+            ukuranDropdown.add(option3);
+
+            var option4 = document.createElement("option");
+            option4.value = "150ml";
+            option4.text = "150ml";
+            ukuranDropdown.add(option4);
+
+            var option5 = document.createElement("option");
+            option5.value = "200ml";
+            option5.text = "200ml";
+            ukuranDropdown.add(option5);
+        } else if (kemasan === "Tablet") {
+            // Jika kemasan adalah Tablet, menambahkan pilihan ukuran obat Tablet
+
+            var option1 = document.createElement("option");
+            option1.value = "";
+            option1.text = "Pilih Ukuran Tablet";
+            ukuranDropdown.add(option1);
+
+            var option2 = document.createElement("option");
+            option2.value = "5btr";
+            option2.text = "5btr";
+            ukuranDropdown.add(option2);
+
+            var option3 = document.createElement("option");
+            option3.value = "10btr";
+            option3.text = "10btr";
+            ukuranDropdown.add(option3);
+
+            var option4 = document.createElement("option");
+            option4.value = "15btr";
+            option4.text = "15btr";
+            ukuranDropdown.add(option4);
+
+            var option5 = document.createElement("option");
+            option5.value = "20btr";
+            option5.text = "20btr";
+            ukuranDropdown.add(option5);
+        } else if (kemasan === "Hirup") {
+            // Jika kemasan adalah Hirup, menambahkan pilihan ukuran obat Hirup
+
+            var option1 = document.createElement("option");
+            option1.value = "";
+            option1.text = "Pilih Ukuran Hirup";
+            ukuranDropdown.add(option1);
+
+            var option2 = document.createElement("option");
+            option2.value = "50ml";
+            option2.text = "50ml";
+            ukuranDropdown.add(option2);
+
+            var option3 = document.createElement("option");
+            option3.value = "100ml";
+            option3.text = "100ml";
+            ukuranDropdown.add(option3);
+
+            var option4 = document.createElement("option");
+            option4.value = "150ml";
+            option4.text = "150ml";
+            ukuranDropdown.add(option4);
+
+            var option5 = document.createElement("option");
+            option5.value = "200ml";
+            option5.text = "200ml";
+            ukuranDropdown.add(option5);
+        }
+    }
+
+    // Mendengarkan perubahan pada dropdown kemasan
+    var kemasanDropdown = document.getElementById("kemasan");
+    kemasanDropdown.addEventListener("change", function() {
+        var selectedKemasan = this.value;
+        fillUkuranDropdown(selectedKemasan);
+    });
+</script>
+
+@endsection
+
 @endsection

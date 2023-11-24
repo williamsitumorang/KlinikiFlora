@@ -234,8 +234,8 @@
       e.preventDefault();
       
       Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: 'Apa Kamu Yakin?',
+        text: "Menghapus Data Ini!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -244,9 +244,9 @@
       }).then((result) => {
         if (result.isConfirmed) {
               Swal.fire(
-              'Deleted!',
-              'Your file has been deleted.',
-              'success'
+              'Terhapus',
+              'Data Obat Telah Terhapus',
+              'success',
             )
           // Submit form untuk menghapus data
           $('#deleteForm').submit();
@@ -255,6 +255,8 @@
     });
   });
 </script>
+
+@yield('scripts')
 
     </body>
 </html> 

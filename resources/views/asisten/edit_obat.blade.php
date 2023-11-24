@@ -63,6 +63,21 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="singkatan" class="col-md-4 col-form-label text-md-right">{{ __('Singkatan Obat') }}</label>
+
+                            <div class="col-md-6 mb-3">
+                              <input type="text" name='singkatan' value = "{{$obat['singkatan']}}" placeholder="Singkatan Baru..." id="singkatan" class="form-control @error('singkatan') is-invalid @enderror" required >
+
+                                @error('singkatan')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
                             <label for="keterangan" class="col-md-4 col-form-label text-md-right" >{{ __('Keterangan') }}</label>
 
                             <div class="col-md-6 mb-3">
@@ -129,29 +144,6 @@
                             </div>
                         </div>
 
-                        {{-- <div class="form-group row">
-                            <label for="kemasan" class="col-md-4 col-form-label text-md-right">{{ __('Kemasan') }}</label>
-                            <div class="col-md-6 mb-3">
-                                <div class="input-group custom-dropdown">
-                                    <select id="kemasan" class="form-control @error('kemasan') is-invalid @enderror" name="kemasan" required>
-                                        <option selected disabled value="">Pilih Kemasan</option>
-                                        <option value="Tablet">Tablet</option>
-                                        <option value="Sirop">Sirop</option>
-                                        <option value="Hirup">Hirup</option>
-                                    </select>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text" data-toggle="dropdown">
-                                            <i class="fas fa-caret-down"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                @error('kemasan')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div> --}}
 
                         <div class="form-group row mb-3">
                             <div class="col-md-6 offset-md-4">

@@ -89,6 +89,33 @@
                 <a href="{{ route('show.patient', $item->id) }}" rel="tooltip" class="btn btn-success btn-sm">
                         <i>Lihat Medical Record</i>
                 </a>
+
+                {{-- <a href="#" data-toggle="modal" data-target="#exampleModal{{$item->id}} " rel="tooltip" class="btn btn-success btn-sm">
+                    <i>Lihat Medical Record</i>
+                </a>
+
+                    <div class="modal fade" id="exampleModal{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Medical Record</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                @foreach ($medical as $one )
+                                    
+                                @endforeach
+                                <div class="modal-body">
+                                    <p>Medical Record Pada tanggal {{ $one->created_at }}</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                    <a href="{{ route('show.patient', $item->id) }}" class="btn btn-primary">Lihat</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div> --}}
             </td>
           </tr>
           @endforeach

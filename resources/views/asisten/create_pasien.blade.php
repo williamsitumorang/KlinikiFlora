@@ -122,6 +122,21 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="wali" class="col-md-4 col-form-label text-md-right">{{ __('Orang Tua/Wali') }}</label>
+
+                            <div class="col-md-6 mb-3">
+                                <input id="wali" type="text" class="form-control @error('wali') is-invalid @enderror" name="wali" value="{{ old('wali') }}" required autocomplete="wali">
+
+                                @error('wali')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
                             <label for="phone_number" class="col-md-4 col-form-label text-md-right">{{ __('Nomor Telepon') }}</label>
 
                             <div class="col-md-6 mb-3">

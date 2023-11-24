@@ -22,7 +22,7 @@
 
   <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-9">
+        <div class="col-md-12">
 
     @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
@@ -39,7 +39,7 @@
 
   <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-9">
+        <div class="col-md-12">
             <div class="card shadow">
                 <div class="card-header shadow mb-3">{{ __('Tambahkan Medical Record') }}</div>
 
@@ -148,24 +148,74 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="obatSelect" class="col-md-4 col-form-label text-md-right">Pilih Obat:</label>
+                            <label for="jenis" class="col-md-4 col-form-label text-md-right">{{ __('Kategori') }}</label>
+                            <div class="col-md-6 mb-3">
+                                <select id="jenis" class="form-control @error('keterangan_obat') is-invalid @enderror" name="jenis_penyakit" required>
+                                    <option selected disabled value=""> Pilih Kategori </option>
+                                    <option value="Ringan">Ringan</option>
+                                    <option value="Sedang">Sedang</option>
+                                    <option value="Berat">Berat</option>
+                                </select>
+                                @error('keterangan_obat')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                        <div class="border-top mt-1"></div>
+                        <div class="border-top mt-1"></div>
+                        <div class="border-top mt-1"></div>
+                        
+
+                        <div class="form-group row mt-3">
+                            <label for="obatSelect" class="col-md-1 col-form-label text-md-right">Pilih Obat:</label>
                             <div class="col-md-6">
                                 <div class="input-group">
-                                    <select id="obatSelect1" class="form-control select2 @error('obat') is-invalid @enderror" name="obat" required>
+                                    <select id="obatSelect1" class="col-md-6 form-control select2 @error('obatSelect1') is-invalid @enderror" name="obat" required>
                                         <option selected disabled value="">Pilih obat</option>
                         
                                         @foreach($obat as $item)
                                             @if ($item->jumlah > 0)
-                                                <option value="{{ $item->id }}">{{ $item->nama_obat }}</option>
+                                                <option value="{{ $item->id }}">{{ $item->nama_obat }} ({{ $item->ukuran }})</option>
                                             @else
-                                                <option value="{{ $item->id }}" disabled>{{ $item->nama_obat }} (Habis)</option>
+                                                <option value="{{ $item->id }}" disabled>{{ $item->nama_obat }} ({{ $item->ukuran }})</option>
                                             @endif
                                         @endforeach
                                     </select>
-                        
-                                    <input id="jumlah1" placeholder="jumlah obat" type="number" class="ml-3 form-control @error('jumlah') is-invalid @enderror" name="jumlah_dipakai" value="{{ old('jumlah') }}" required autocomplete="jumlah">
+                                   
+                                        <input id="jumlah1" placeholder="jumlah" type="number" class="ml-3 form-control @error('jumlah') is-invalid @enderror" name="jumlah_dipakai" value="{{ old('jumlah') }}" required autocomplete="jumlah">
+                                    
                                 </div>
-                                @error('diagnosa')
+                                @error('obatSelect1')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="col-md-2">
+                                <select id="aturan_pakai" class="form-control @error('aturan_pakai') is-invalid @enderror" name="aturan" required>
+                                    <option selected disabled value=""> Aturan </option>
+                                    <option value="1x1">1x1</option>
+                                    <option value="2x1">2x1</option>
+                                    <option value="3x1">3x1</option>
+                                    <option value="1x2">1x2</option>
+                                    <option value="2x2">2x2</option>
+                                    <option value="3x2">3x2</option>
+                                </select>
+                                @error('aturan_pakai')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="col-md-2">
+                                <select id="keterangan_obat" class="form-control @error('keterangan_obat') is-invalid @enderror" name="keterangan" required>
+                                    <option selected disabled value=""> Keterangan </option>
+                                    <option value="Setelah Makan">Setelah Makan</option>
+                                    <option value="Sebelum Makan">Sebelum Makan</option>
+                                </select>
+                                @error('keterangan_obat')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -173,33 +223,66 @@
                             </div>
                         </div>
                         
+                        
                         <div class="form-group row">
-                            <label for="obatSelect2" class="col-md-4 col-form-label text-md-right"></label>
+                            <label for="obatSelect2" class="col-md-0 col-form-label text-md-right"></label>
                             <div class="col-md-6">
-                                <a href="#" id="tambahObatLink" class="font-italic">Klik Disini</a>
+                                <p>jika ingin menambahkan lebih dari satu obat<a href="#" class="ml-2" id="tambahObatLink" class="font-italic">Klik Disini</a></p>
                             </div>
                         </div>
                         
-                        <div id="formObat" style="display: none;">
+                        <div id="formObat" style="display: none;" >
                             
-                            <div class="form-group row">
-                                <label for="obatSelect2" class="col-md-4 col-form-label text-md-right"></label>
+
+                            <div class="form-group row mt-3">
+                                <label for="obatSelect2" class="col-md-1 col-form-label text-md-right"></label>
                                 <div class="col-md-6">
                                     <div class="input-group">
-                                        <select id="obatSelect2" class="form-control select2 @error('obat') is-invalid @enderror" name="obat2">
+                                        <select id="obatSelect2" class="col-md-6 form-control select2 @error('obatSelect1') is-invalid @enderror" name="obat2">
                                             <option selected disabled value="">Pilih obat</option>
+                            
                                             @foreach($obat as $item)
                                                 @if ($item->jumlah > 0)
-                                                    <option value="{{ $item->id }}">{{ $item->nama_obat }}</option>
+                                                    <option value="{{ $item->id }}">{{ $item->nama_obat }} ({{ $item->ukuran }})</option>
                                                 @else
-                                                    <option value="{{ $item->id }}" disabled>{{ $item->nama_obat }} (Habis)</option>
+                                                    <option value="{{ $item->id }}" disabled>{{ $item->nama_obat }} ({{ $item->ukuran }})</option>
                                                 @endif
                                             @endforeach
                                         </select>
-                                        <input id="jumlah2" placeholder="jumlah obat" type="number" class="ml-3 form-control @error('jumlah') is-invalid @enderror" name="jumlah_dipakai2" value="{{ old('jumlah') }}" autocomplete="jumlah">
+                                       
+                                            <input id="jumlah2" placeholder="jumlah" type="number" class="ml-3 form-control @error('jumlah2') is-invalid @enderror" name="jumlah_dipakai2" value="{{ old('jumlah2') }}" autocomplete="jumlah2">
+                                        
                                     </div>
-                                    
-                                    @error('diagnosa')
+                                    @error('obatSelect2')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-2">
+                                    <select id="aturan_pakai2" class="form-control @error('aturan_pakai2') is-invalid @enderror" name="aturan2">
+                                        <option selected disabled value=""> Aturan </option>
+                                        <option value="1x1">1x1</option>
+                                        <option value="2x1">2x1</option>
+                                        <option value="3x1">3x1</option>
+                                        <option value="1x2">1x2</option>
+                                        <option value="2x2">2x2</option>
+                                        <option value="3x2">3x2</option>
+                                    </select>
+                                    @error('aturan_pakai')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-2">
+                                    <select id="keterangan_obat" class="form-control @error('keterangan_obat') is-invalid @enderror" name="keterangan2">
+                                        <option selected disabled value=""> Keterangan </option>
+                                        <option value="Setelah Makan">Setelah Makan</option>
+                                        <option value="Sebelum Makan">Sebelum Makan</option>
+                                    </select>
+                                    @error('keterangan_obat')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -207,25 +290,56 @@
                                 </div>
                             </div>
                         
-                            <div class="form-group row">
-                                <label for="obatSelect3" class="col-md-4 col-form-label text-md-right"></label>
+
+                            <div class="form-group row mt-3">
+                                <label for="obatSelect3" class="col-md-1 col-form-label text-md-right"></label>
                                 <div class="col-md-6">
                                     <div class="input-group">
-                                        <select id="obatSelect3" class="form-control select2 @error('obat') is-invalid @enderror" name="obat3">
+                                        <select id="obatSelect3" class="col-md-6 form-control select2 @error('obatSelect1') is-invalid @enderror" name="obat3" >
                                             <option selected disabled value="">Pilih obat</option>
-                        
+                            
                                             @foreach($obat as $item)
                                                 @if ($item->jumlah > 0)
-                                                    <option value="{{ $item->id }}">{{ $item->nama_obat }}</option>
+                                                    <option value="{{ $item->id }}">{{ $item->nama_obat }} ({{ $item->ukuran }})</option>
                                                 @else
-                                                    <option value="{{ $item->id }}" disabled>{{ $item->nama_obat }} (Habis)</option>
+                                                    <option value="{{ $item->id }}" disabled>{{ $item->nama_obat }} ({{ $item->ukuran }})</option>
                                                 @endif
                                             @endforeach
                                         </select>
-                        
-                                        <input id="jumlah3" placeholder="jumlah obat" type="number" class="ml-3 form-control @error('jumlah') is-invalid @enderror" name="jumlah_dipakai3" value="{{ old('jumlah') }}" autocomplete="jumlah">
+                                       
+                                            <input id="jumlah2" placeholder="jumlah" type="number" class="ml-3 form-control @error('jumlah2') is-invalid @enderror" name="jumlah_dipakai3" value="{{ old('jumlah2') }}" autocomplete="jumlah2">
+                                        
                                     </div>
-                                    @error('diagnosa')
+                                    @error('obatSelect3')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-2">
+                                    <select id="aturan_pakai3" class="form-control @error('aturan_pakai2') is-invalid @enderror" name="aturan3">
+                                        <option selected disabled value=""> Aturan </option>
+                                        <option value="1x1">1x1</option>
+                                        <option value="2x1">2x1</option>
+                                        <option value="3x1">3x1</option>
+                                        <option value="1x2">1x2</option>
+                                        <option value="2x2">2x2</option>
+                                        <option value="3x2">3x2</option>
+                                    </select>
+                                    @error('aturan_pakai')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-2">
+                                    <select id="keterangan_obat" class="form-control @error('keterangan_obat') is-invalid @enderror" name="keterangan3">
+                                        <option selected disabled value=""> Keterangan </option>
+                                        <option value="Setelah Makan">Setelah Makan</option>
+                                        <option value="Sebelum Makan">Sebelum Makan</option>
+                                    </select>
+                                    @error('keterangan_obat')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -233,57 +347,120 @@
                                 </div>
                             </div>
                         
-                            <div class="form-group row">
-                                <label for="obatSelect" class="col-md-4 col-form-label text-md-right"></label>
+
+                            <div class="form-group row mt-3">
+                                <label for="obatSelect4" class="col-md-1 col-form-label text-md-right"></label>
                                 <div class="col-md-6">
                                     <div class="input-group">
-                                        <select id="obatSelect4" class="form-control select2 @error('obat') is-invalid @enderror" name="obat4">
+                                        <select id="obatSelect4" class="col-md-6 form-control select2 @error('obatSelect4') is-invalid @enderror" name="obat4" >
                                             <option selected disabled value="">Pilih obat</option>
-                        
+                            
                                             @foreach($obat as $item)
                                                 @if ($item->jumlah > 0)
-                                                    <option value="{{ $item->id }}">{{ $item->nama_obat }}</option>
+                                                    <option value="{{ $item->id }}">{{ $item->nama_obat }} ({{ $item->ukuran }})</option>
                                                 @else
-                                                    <option value="{{ $item->id }}" disabled>{{ $item->nama_obat }} (Habis)</option>
+                                                    <option value="{{ $item->id }}" disabled>{{ $item->nama_obat }} ({{ $item->ukuran }})</option>
                                                 @endif
                                             @endforeach
                                         </select>
-                        
-                                        <input id="jumlah4" placeholder="jumlah obat" type="number" class="ml-3 form-control @error('jumlah') is-invalid @enderror" name="jumlah_dipakai4" value="{{ old('jumlah') }}" autocomplete="jumlah">
+                                       
+                                            <input id="jumlah2" placeholder="jumlah" type="number" class="ml-3 form-control @error('jumlah4') is-invalid @enderror" name="jumlah_dipakai4" value="{{ old('jumlah4') }}" autocomplete="jumlah4">
+                                        
                                     </div>
-                                    @error('diagnosa')
+                                    @error('obatSelect4')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-2">
+                                    <select id="aturan_pakai4" class="form-control @error('aturan_pakai4') is-invalid @enderror" name="aturan4">
+                                        <option selected disabled value=""> Aturan </option>
+                                        <option value="1x1">1x1</option>
+                                        <option value="2x1">2x1</option>
+                                        <option value="3x1">3x1</option>
+                                        <option value="1x2">1x2</option>
+                                        <option value="2x2">2x2</option>
+                                        <option value="3x2">3x2</option>
+                                    </select>
+                                    @error('aturan_pakai4')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-2">
+                                    <select id="keterangan_obat" class="form-control @error('keterangan_obat') is-invalid @enderror" name="keterangan4">
+                                        <option selected disabled value=""> Keterangan </option>
+                                        <option value="Setelah Makan">Setelah Makan</option>
+                                        <option value="Sebelum Makan">Sebelum Makan</option>
+                                    </select>
+                                    @error('keterangan_obat')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
                             </div>
-                        
-                            <div class="form-group row">
-                                <label for="obatSelect" class="col-md-4 col-form-label text-md-right"></label>
+
+
+                            <div class="form-group row mt-3">
+                                <label for="obatSelect5" class="col-md-1 col-form-label text-md-right"></label>
                                 <div class="col-md-6">
                                     <div class="input-group">
-                                        <select id="obatSelect5" class="form-control select2 @error('obat') is-invalid @enderror" name="obat5">
+                                        <select id="obatSelect5" class="col-md-6 form-control select2 @error('obatSelect5') is-invalid @enderror" name="obat5">
                                             <option selected disabled value="">Pilih obat</option>
-                        
+                            
                                             @foreach($obat as $item)
                                                 @if ($item->jumlah > 0)
-                                                    <option value="{{ $item->id }}">{{ $item->nama_obat }}</option>
+                                                    <option value="{{ $item->id }}">{{ $item->nama_obat }} ({{ $item->ukuran }})</option>
                                                 @else
-                                                    <option value="{{ $item->id }}" disabled>{{ $item->nama_obat }} (Habis)</option>
+                                                    <option value="{{ $item->id }}" disabled>{{ $item->nama_obat }} ({{ $item->ukuran }})</option>
                                                 @endif
                                             @endforeach
                                         </select>
-                        
-                                        <input id="jumlah5" placeholder="jumlah obat" type="number" class="ml-3 form-control @error('jumlah') is-invalid @enderror" name="jumlah_dipakai5" value="{{ old('jumlah') }}" autocomplete="jumlah">
+                                       
+                                            <input id="jumlah5" placeholder="jumlah" type="number" class="ml-3 form-control @error('jumlah5') is-invalid @enderror" name="jumlah_dipakai5" value="{{ old('jumlah5') }}"  autocomplete="jumlah5">
+                                        
                                     </div>
-                                    @error('diagnosa')
+                                    @error('obatSelect4')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-2">
+                                    <select id="aturan_pakai5" class="form-control @error('aturan_pakai5') is-invalid @enderror" name="aturan5">
+                                        <option selected disabled value=""> Aturan </option>
+                                        <option value="1x1">1x1</option>
+                                        <option value="2x1">2x1</option>
+                                        <option value="3x1">3x1</option>
+                                        <option value="1x2">1x2</option>
+                                        <option value="2x2">2x2</option>
+                                        <option value="3x2">3x2</option>
+                                    </select>
+                                    @error('aturan_pakai5')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-2">
+                                    <select id="keterangan_obat" class="form-control @error('keterangan_obat') is-invalid @enderror" name="keterangan5">
+                                        <option selected disabled value=""> Keterangan </option>
+                                        <option value="Setelah Makan">Setelah Makan</option>
+                                        <option value="Sebelum Makan">Sebelum Makan</option>
+                                    </select>
+                                    @error('keterangan_obat')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
                             </div>
+
                         </div>
                             
                           </div>

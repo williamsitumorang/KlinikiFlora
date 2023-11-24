@@ -77,7 +77,7 @@
             </tr>
             @else
             <tr>
-                <td colspan="4">Pasien tidak memiliki Rekam M   edis.</td>
+                <td colspan="4">Pasien tidak memiliki Rekam Medis.</td>
             </tr>
             @endif
         </tbody>
@@ -126,6 +126,11 @@
             <th style="width: 500px" scope="row" colspan="3">Diagnosa</th>
             <td colspan="2">{{ $report->diagnosa }}</td>
           </tr>
+
+          <tr>
+            <th style="width: 500px" scope="row" colspan="3">Kategori</th>
+            <td colspan="2">{{ $report->jenis_penyakit }}</td>
+          </tr>
  
           </tbody>
           </table>
@@ -143,31 +148,43 @@
                     <th scope="row" rowspan="">Nama Obat</th>
                     <td>Jumlah</td>
                     <td>Kemasan</td>
+                    <td>Aturan</td>
+                    <td>Keterangan</td>
                   </tr>
                   <tr>
-                    <th scope="row" rowspan="">{{ $report->nama_obat1 }}</th>
+                    <th scope="row" rowspan="">{{ $report->nama_obat1 }} {{ $report->ukuran1 }}  </th>
                     <td>{{ $report->jumlah_dipakai }}</td>
                     <td>{{ $report->kemasan1 }}</td>
+                    <td>{{ $report->aturan }}</td>
+                    <td>{{ $report->keterangan }}</td>
                   </tr>
                   <tr>
-                    <th scope="row" rowspan="">{{ $report->nama_obat2 }}</th>
+                    <th scope="row" rowspan="">{{ $report->nama_obat2 }} {{ $report->ukuran2 }}</th>
                     <td>{{ $report->jumlah_dipakai2 }}</td>
                     <td>{{ $report->kemasan2 }}</td>
+                    <td>{{ $report->aturan2 }}</td>
+                    <td>{{ $report->keterangan2 }}</td>
                   </tr>
                   <tr>
-                    <th scope="row" rowspan="">{{ $report->nama_obat3 }}</th>
+                    <th scope="row" rowspan="">{{ $report->nama_obat3 }} {{ $report->ukuran3 }}</th>
                     <td>{{ $report->jumlah_dipakai3 }}</td>
                     <td>{{ $report->kemasan3 }}</td>
+                    <td>{{ $report->aturan3 }}</td>
+                    <td>{{ $report->keterangan3 }}</td>
                   </tr>
                   <tr>
-                    <th scope="row" rowspan="">{{ $report->nama_obat4 }}</th>
+                    <th scope="row" rowspan="">{{ $report->nama_obat4 }} {{ $report->ukuran4 }}</th>
                     <td>{{ $report->jumlah_dipakai4 }}</td>
                     <td>{{ $report->kemasan4 }}</td>
+                    <td>{{ $report->aturan4 }}</td>
+                    <td>{{ $report->keterangan4 }}</td>
                   </tr>
                   <tr>
-                    <th scope="row" rowspan="">{{ $report->nama_obat5 }}</th>
+                    <th scope="row" rowspan="">{{ $report->nama_obat5 }} {{ $report->ukuran5 }}</th>
                     <td>{{ $report->jumlah_dipakai5 }}</td>
                     <td>{{ $report->kemasan5 }}</td>
+                    <td>{{ $report->aturan5 }}</td>
+                    <td>{{ $report->keterangan5 }}</td>
                   </tr>
                   </tbody>
                   </table>

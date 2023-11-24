@@ -91,11 +91,11 @@
         @foreach ($data as $obat)
         <tr >
             <th scope="row">{{ $obat->id }}</th>
-            <td>{{ $obat->nama_obat }}</td>
+            <td>{{ $obat->nama_obat }} ( {{ $obat->singkatan  }}) </td>
             <td>{{ $obat->keterangan }}</td>
             <td>{{ $obat->tanggal_masuk }}</td>
             <td>{{ $obat->jumlah }}</td>
-            <td>{{ $obat->kemasan }}</td>
+            <td>{{ $obat->kemasan }} ({{ $obat->ukuran }})</td>
             <td class="">
                 @if ($obat->jumlah <= 0)
                     <span class="false text-white">{{ __('Habis') }}</span>
